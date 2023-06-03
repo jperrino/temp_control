@@ -1,8 +1,8 @@
-#Instructions
-##Requirements
+# Instructions
+## Requirements
 Python: `https://www.python.org/downloads/`
 
-##Setup
+## Setup
 1. Clone repository
 2. Move to repository root folder: `cd ./tempAPI`
 3. Create virtual environment: `py -m venv tempapi-env`
