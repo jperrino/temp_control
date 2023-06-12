@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     database_username: str
     database_password: str
     database_name: str
+    graphs_file_path: str
 
     class Config:
         env_file = '.env_remote'

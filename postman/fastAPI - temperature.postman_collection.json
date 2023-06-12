@@ -13,7 +13,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{fa_local_url}}/measure?temp=22.7&device=eee",
+					"raw": "{{fa_local_url}}/measure?temp=72.5&device=test1",
 					"host": [
 						"{{fa_local_url}}"
 					],
@@ -23,11 +23,92 @@
 					"query": [
 						{
 							"key": "temp",
-							"value": "22.7"
+							"value": "72.5"
 						},
 						{
 							"key": "device",
-							"value": "eee"
+							"value": "test1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_graph_today",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fa_local_url}}/graph?device=test1&time=today",
+					"host": [
+						"{{fa_local_url}}"
+					],
+					"path": [
+						"graph"
+					],
+					"query": [
+						{
+							"key": "device",
+							"value": "test1"
+						},
+						{
+							"key": "time",
+							"value": "today"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_graph_week",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fa_local_url}}/graph?device=test1&time=week",
+					"host": [
+						"{{fa_local_url}}"
+					],
+					"path": [
+						"graph"
+					],
+					"query": [
+						{
+							"key": "device",
+							"value": "test1"
+						},
+						{
+							"key": "time",
+							"value": "week"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_graph_month",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fa_local_url}}/graph?device=Arduino&time=month",
+					"host": [
+						"{{fa_local_url}}"
+					],
+					"path": [
+						"graph"
+					],
+					"query": [
+						{
+							"key": "device",
+							"value": "Arduino"
+						},
+						{
+							"key": "time",
+							"value": "month"
 						}
 					]
 				}
