@@ -2,3 +2,4 @@ __pycache__
 /tempapi-env
 .idea
 .env_remote
+*.jpeg

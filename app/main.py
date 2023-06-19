@@ -1,17 +1,18 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import measure
+from .routers import measure, graph
 
 app = FastAPI()
 
 origins = ['*']
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # this is the list of domains which our API is allowed to talk to
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"], # not only domains, but also only some http methods could be allowed
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
 app.include_router(measure.router)
+app.include_router(graph.router)
 
