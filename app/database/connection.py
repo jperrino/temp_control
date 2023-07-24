@@ -1,12 +1,21 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from ..config import settings
+from app.config import db_settings
 
 # SQL_ALCHEMY_DATABASE_URL = f'mysql+pymysql://admin:admin' \
 #                            f'@localhost:3306/temp_control'
 
-SQL_ALCHEMY_DATABASE_URL = f'mysql+pymysql://{settings.database_username}:{settings.database_password}' \
-                           f'@{settings.database_hostname}:{settings.database_port}/{settings.database_name}'
+'''
+    DATABASE CONFIGURATION
+'''
+DB_USERNAME = db_settings.database_username
+DB_PASSWORD = db_settings.database_password
+DB_HOST = db_settings.database_hostname
+DB_PORT = db_settings.database_port
+DB_NAME = db_settings.database_name
+
+SQL_ALCHEMY_DATABASE_URL = f'mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}' \
+                           f'@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 
 engine = create_engine(SQL_ALCHEMY_DATABASE_URL)
 

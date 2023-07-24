@@ -1,5 +1,5 @@
 __pycache__
 /tempapi-env
 .idea
-.env_remote
+.db_config_remote
 *.jpeg
