@@ -1,14 +1,10 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-# class MeasureResponse(BaseModel):
-#     message: str
 
-
-class MeasureResponse(BaseModel):
+class DeviceResponse(BaseModel):
     id: int
-    temperature: int
-    device: str
+    name: str
     created_at: datetime
 
     class Config:

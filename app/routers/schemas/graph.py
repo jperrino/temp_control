@@ -1,5 +1,8 @@
 from pydantic import BaseModel
-from datetime import datetime
+
+
+class GraphRequest(BaseModel):
+    option: str
 
 
 class GraphResponse(BaseModel):

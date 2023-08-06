@@ -1,10 +1,10 @@
 from fastapi import APIRouter, status, Depends, HTTPException
 from sqlalchemy.orm import Session
-from ..schemas import graph as graph_schema
-from ..models import measure as measure_model
-from ..database.connection import get_db
+from app.routers.schemas import graph as graph_schema
+from app.database.models import measure as measure_model
+from app.database.connection import get_db
 from datetime import datetime
-from ..plotting import plotter
+from app.plotting import plotter
 
 router = APIRouter(
     prefix="/graph",
@@ -13,7 +13,7 @@ router = APIRouter(
 
 
 @router.get("/", status_code=status.HTTP_200_OK, response_model=graph_schema.GraphResponse)
-async def get_graph(db: Session = Depends(get_db),
+async def get_graph(option : graph_schema.GraphRequest, db: Session = Depends(get_db),
                     device: str = 'aaa',
                     time: str = 'bbb'):
     today_datetime = datetime(datetime.today().year, datetime.today().month, datetime.today().day)
