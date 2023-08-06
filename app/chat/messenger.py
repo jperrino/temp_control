@@ -11,27 +11,6 @@ TWILIO_ACCOUNT_SID = common_settings.twilio_account_sid
 TWILIO_AUTH_TOKEN = common_settings.twilio_auth_token
 TWILIO_PHONE_NUMBER = common_settings.twilio_phone_number
 
-# '''
-#     STATIC MESSAGES
-# '''
-# WELCOME_MESSAGE = "Bienvenido al servicio de control de temperatura.\n" \
-#                   "Elija una opcion:\n" \
-#                   "1.Recibir la grafica de temperatura de hoy\n" \
-#                   "2.Recibir la grafica de temperatura semanal\n" \
-#                   "3.Recibir la grafica de temperatura mensual"
-
-# WELCOME_MESSAGE = "Bienvenido al servicio de control de temperatura.\n" \
-#                   "Ingrese el nombre del dispositivo:"
-#
-#
-# SELECT_TIME_RANGE_MESSAGE = "Elija una opcion:\n" \
-#                             "1.Recibir la grafica de temperatura de hoy\n" \
-#                             "2.Recibir la grafica de temperatura semanal\n" \
-#                             "3.Recibir la grafica de temperatura mensual"
-#
-# INVALID_OPTION_MESSAGE = "Opcion no valida.\n" \
-#                          "Por favor, seleccione 1, 2 o 3."
-
 
 def send_welcome_message(phone_number: str):
     client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
@@ -78,6 +57,15 @@ def send_select_flow_message(phone_number: str):
     )
 
 
+def send_invalid_flow_option(phone_number: str, flow_option: str):
+    client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+    client.messages.create(
+        to=phone_number,
+        from_=TWILIO_PHONE_NUMBER,
+        body=Message.INVALID_FLOW_OPTION_MESSAGE.replace('{flow_option}', flow_option)
+    )
+
+
 def send_device_not_found_message(phone_number: str, device: str):
     client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
     client.messages.create(
@@ -110,6 +98,10 @@ def process_graph_request_message(phone_number: str, device_name: str, time_rang
     send_message(phone_number, response)
 
 
-def process_temp_set_message(device_name: str, flow_status: int, temp_value: str, db: Session):
-    processor.set_temperature(device_name, flow_status, temp_value, db)
-
+def process_temp_set_message(phone_number: str, device_name: str, flow_status: int, temp_value: str, db: Session):
+    response = processor.set_temperature(device_name, flow_status, temp_value, db)
+    if response is not None:
+        send_message(phone_number, response)
+        return False
+    else:
+        return True

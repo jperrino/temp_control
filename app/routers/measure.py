@@ -38,6 +38,7 @@ async def get_measure(db: Session = Depends(get_db),
     new_measure_to_db = measure_model.Measure(temperature=temp, device_id=found_device.id)
     db.add(new_measure_to_db)
     db.commit()
-    db.refresh(new_measure_to_db)  # retrieve recently created post and store it in new_post variable
+    # retrieve recently created measure and store it in new_measure_to_db variable
+    db.refresh(new_measure_to_db)
     return new_measure_to_db
 

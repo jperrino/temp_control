@@ -14,6 +14,8 @@ class DataBaseSettings(BaseSettings):
 
 
 class CommonSettings(BaseSettings):
+    app_host: str
+    app_port: int
     twilio_account_sid: str
     twilio_auth_token: str
     twilio_phone_number: str

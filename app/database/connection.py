@@ -2,9 +2,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.config import db_settings
 
-# SQL_ALCHEMY_DATABASE_URL = f'mysql+pymysql://admin:admin' \
-#                            f'@localhost:3306/temp_control'
-
 '''
     DATABASE CONFIGURATION
 '''

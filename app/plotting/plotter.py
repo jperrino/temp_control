@@ -23,12 +23,17 @@ def plot_graph(m_list: list, device_name: str):
         x_values.append(m.created_at)
         y_values.append(m.temperature)
 
+    # clear the current axes at the beginning
+    plt.gca().cla()
+    # start the new plot
     plt.plot(x_values, y_values, 'o-r')
     plt.xlabel(X_LABEL)
     plt.ylabel(Y_LABEL)
     plt.xticks(rotation=45, ha='right')
     plt.savefig(file_path, bbox_inches="tight")
 
-    # return {"path": file_path, "time": now.strftime(DATE_FORMAT)}
-    return {"name": file_name, "path": file_path}
+    # clear lists after plot, just in case
+    x_values.clear()
+    y_values.clear()
 
+    return {"name": file_name, "path": file_path}

@@ -14,7 +14,6 @@ router = APIRouter(
 async def register_device(db: Session = Depends(get_db),
                           name: str = 'aaa'):
     found_device = db.query(device_model.Device).filter(device_model.Device.name == name).first()
-    # found_device = device_query.first()
 
     if found_device:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,

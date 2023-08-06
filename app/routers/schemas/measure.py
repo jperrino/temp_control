@@ -1,9 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-# class MeasureResponse(BaseModel):
-#     message: str
-
 
 class MeasureResponse(BaseModel):
     id: int

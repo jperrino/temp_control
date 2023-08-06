@@ -26,8 +26,18 @@ class Message(str, Enum):
                           "1.Solicitar grafica de temperatura\n" \
                           "2.Definir rango de temperatura"
 
+    INVALID_FLOW_OPTION_MESSAGE = "Opcion no valida: {flow_option}\n" \
+                                  "Ingrese 1 o 2."
+
     SELECT_TEMP_MIN_MESSAGE = "Ingrese el valor minimo de temperatura:"
 
     SELECT_TEMP_MAX_MESSAGE = "Ingrese el valor maximo de temperatura:"
+
+    INVALID_TEMP_VALUE_MESSAGE = "Valor de temperatura invalido: {temp_value}\n" \
+                                 "Intente nuevamente"
+
+    INVALID_MAX_TEMP_BELOW_MIN_TEMP_MESSAGE = "Valor de temperatura invalido: {temp_value}\n" \
+                                              "El valor de temperatura maxima debe ser mayor que el valor minimo.\n" \
+                                              "Intente nuevamente"
 
     TRANSACTION_COMPLETED_MESSAGE = "Operacion completada."
