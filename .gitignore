@@ -2,4 +2,6 @@ __pycache__
 /tempapi-env
 .idea
 .db_config_remote
+.db_config_local
+.common_config
 *.jpeg
