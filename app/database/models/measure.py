@@ -13,3 +13,6 @@ class Measure(Base):
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('CURRENT_TIMESTAMP()'))
     device_id = Column(Integer, ForeignKey('device.id', ondelete='CASCADE'), nullable=False)
     device = relationship('Device')
+
+    def to_dict(self):
+        return {field.name: getattr(self, field.name) for field in self.__table__.c}

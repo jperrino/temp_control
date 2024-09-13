@@ -6,30 +6,20 @@ from app.database.models import device as device_model
 from app.database.connection import get_db
 import requests
 
-
 router = APIRouter(
     prefix="/measure",
     tags=['Measure']
 )
 
 
-@router.get("/", status_code=status.HTTP_201_CREATED, response_model=measure_schema.MeasureResponse)
+@router.get("/", status_code=status.HTTP_201_CREATED)
+# , response_model=measure_schema.MeasureResponse)
 async def get_measure(db: Session = Depends(get_db),
                       temp: float = 0,
-                      device: str = 'aaa'):
+                      device: str = 'default'):
     print(f"Temperature: {temp}, Device: {device}")
-    # measure = db.query(measure_model.Measure).first()
 
-    # response = requests.get('https://httpbin.org/get')
-    # print(response.json())
-
-    # print(measure)
-    # return {"message": "OK"}
-    # return measure
-
-    # new_measure = {"temperature": temp, "device": device}
     found_device = db.query(device_model.Device).filter(device_model.Device.name == device).first()
-    # found_device = device_query.first()
 
     if not found_device:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -40,5 +30,8 @@ async def get_measure(db: Session = Depends(get_db),
     db.commit()
     # retrieve recently created measure and store it in new_measure_to_db variable
     db.refresh(new_measure_to_db)
-    return new_measure_to_db
-
+    # parse measure to dictionary and add max and min temperature ranges
+    measure_response = new_measure_to_db.to_dict()
+    measure_response['temp_range_max'] = found_device.temp_range_max
+    measure_response['temp_range_min'] = found_device.temp_range_min
+    return measure_response
